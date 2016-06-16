@@ -1,26 +1,21 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, request
 
-# 這裡設定的 template_folder 為 template 搜尋目錄, 表示位於 user/g1/templates 目錄中
-# 但是若 wcmw14/templates 目錄中有相同名稱的 template file, 則優先取外部的檔案
-# 這樣的設計希望可以在統整各藍圖時, 可以隨時根據需要改寫 template 配置
-b40323240_1= Blueprint('b40323240_1', __name__, url_prefix='/b40323240_1', template_folder='templates')
+bg5_40323253_2 = Blueprint('bg5_40323253_2', __name__, url_prefix='/bg5_40323253_2', template_folder='templates')
 
+@bg5_40323253_2.route('/a')
+def draw_a():
 
-@b40323240_1.route('/threegear', defaults={'n1':15,'n2':20,'n3':18})
-@b40323240_1.route('/threegear/<n1>/<n2>/<n3>')
-def threegear(n1, n2, n3):
-    # 真正最後的架構應該要在函式中準備繪圖所需的資料, 然後用 template 呈現內容
-    title = "網際 2D 繪圖"
-    head = '''
+    outstring ='''
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>'''+ title +'''</title>
+    <title>網際 2D 繪圖</title>
     <!-- IE 9: display inline SVG -->
     <meta http-equiv="X-UA-Compatible" content="IE=9">
-'''
-    script = '''
+
+
 <script type="text/javascript" src="http://brython.info/src/brython_dist.js"></script>
 <script type="text/javascript" src="http://2015fallhw.github.io/cptocadp/static/Cango-8v03.js"></script>
 <script type="text/javascript" src="http://2015fallhw.github.io/cptocadp/static/Cango2D-7v01-min.js"></script>
@@ -31,21 +26,8 @@ window.onload=function(){
 brython(1);
 }
 </script>
-'''
-    headstring = head + script + "</head>"
-    # 能否根據 n1, n2, n3 與 width, 算出合理的 height
-    # 模數計算 m = canvas.width*0.8/(n1+n2+n3)
-    # max([int(n1), int(n2), int(n3)])
-    # 所以 height = 1.2*800*0.8/(int(n1)+int(n2)+int(n3))*max([int(n1), int(n2), int(n3)])
-    height = 1.2*800*0.8/(int(n1)+int(n2)+int(n3))*max([int(n1), int(n2), int(n3)])
-    body = '''
-    
-延伸應用:<br />
-
-軸孔加入 keyway <br />
-與 3D 零件設計繪圖對應 <br/>
-與 2D/3D 軸的設計與繪圖對應<br /><br />
-<canvas id='gear1' width='800' height="'''+str(int(height))+'''"></canvas>
+ 
+<canvas id="gear1" width="800" height="750"></canvas>
  
 <script type="text/python">
 # 將 導入的 document 設為 doc 主要原因在於與舊程式碼相容
@@ -93,9 +75,9 @@ def spur(cx, cy, m, n, pa, theta):
     #print(data)
  
     gearTooth = cobj(data, "SHAPE", {
-            "fillColor":"#ddd0dd",
+            "fillColor":"#1ce320",
             "border": True,
-            "strokeColor": "#606060" })
+            "strokeColor": "#ff000" })
     #gearTooth.rotate(180/n) # rotate gear 1/2 tooth to mesh, 請注意 rotate 角度為 degree
     # theta 為角度
     gearTooth.rotate(theta) 
@@ -129,20 +111,22 @@ def spur(cx, cy, m, n, pa, theta):
     cgo.render(Line)
  
 # 3個齒輪的齒數
-n1 = '''+str(n1)+'''
-n2 = '''+str(n2)+'''
-n3 = '''+str(n3)+'''
+n1 = 30
+n2 = 15
+n3 = 15
+n4 = 30
  
 # m 為模數, 根據畫布的寬度, 計算適合的模數大小
 # Module = mm of pitch diameter per tooth
 # 利用 80% 的畫布寬度進行繪圖
 # 計算模數的對應尺寸
-m = canvas.width*0.8/(n1+n2+n3)
+m = canvas.width*0.8/(n1+n2+n3+n4)
  
 # 根據齒數與模組計算各齒輪的節圓半徑
 pr1 = n1*m/2
 pr2 = n2*m/2
 pr3 = n3*m/2
+pr4 = n4*m/2
  
 # 畫布左右兩側都保留畫布寬度的 10%
 # 依此計算對應的最左邊齒輪的軸心座標
@@ -163,11 +147,7 @@ spur(cx+pr1+pr2, cy, m, n2, pa, 180-180/n2)
 # 但是第2齒為了與第一齒囓合時, 已經從原始定位線轉了 180-180/n2 度
 # 而當第2齒從與第3齒囓合的定位線, 逆時鐘旋轉 180-180/n2 角度後, 原先囓合的第3齒必須要再配合旋轉 (180-180/n2 )*n2/n3
 spur(cx+pr1+pr2+pr2+pr3, cy, m, n3, pa, 180-180/n3+(180-180/n2)*n2/n3)
+spur(cx+pr1+pr2+pr2+pr3+pr3+pr4, cy, m, n4, pa, 180-180/n4)
 </script>
 '''
-    bodystring = "<body>" + body+"</body>"
-    endstring = "</html>"
-    outstring = headstring + bodystring + endstring
     return outstring
-    # 若 template 檔案名稱與位於外部 templates 目錄中的檔案同名, 則取外部的 template
-   # return render_template('g1index.html', user=user)

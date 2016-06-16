@@ -213,7 +213,7 @@ mychain.basic(x10, y10, x1, y1, color="green")
     return outstring
     
 
-@bg3_40123250.route('/taskbacd')
+@bg11_40323240.route('/taskbacd')
 def taskbacd():
     outstring = '''
 <!DOCTYPE html>
@@ -425,7 +425,7 @@ mychain.basic(x10, y10, 0+65*3, 0, color="green")
 
 
 
-@bg3_40123250.route('/taskabcd')
+@bg11_40323240.route('/taskabcd')
 def taskabcd():
     outstring = '''
 <!DOCTYPE html>
