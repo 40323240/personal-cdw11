@@ -389,12 +389,12 @@ def eighteenthirty(x, y):
     # 20 為鏈條兩圓距
     # chain 所圍之圓圈半徑為 20/2/math.asin(degree*math.pi/180/2)
     # degree = math.asin(20/2/radius)*180/math.pi
-    
-    
+    x = 50
+    y = 0
     degree = 20
-    first_degree = 110.78
-    startx = -233.06+x+200
-    starty = 49.48+y-200
+    first_degree = 20.78+90
+    startx = 44.0532
+    starty = -165.17
     repeat = 360 / degree
     # 先畫出左邊第一關鍵節
     outstring = '''
@@ -415,8 +415,8 @@ x1, y1 = mychain.basic_rot('''+str(startx)+","+str(starty)+", "+str(first_degree
     # 接著處理右邊的非虛擬鍊條
     # 先畫出右邊第一關鍵節
  
-    p = -17.89-59.12+x
-    k = 93.98-27.12+y
+    p = 0
+    k = 50
     degree = 12
     first_degree = 4.78+90
     repeat = 360 / degree
@@ -436,7 +436,7 @@ p1, k1 = mychain.basic_rot('''+str(p)+","+str(k)+", "+str(first_degree)+''')
  
     # 上段連接直線
     # 從 x1, y1 作為起點
-    first_degree = 10.78+90
+    first_degree = 10.78 +90 
     repeat = 10
     outstring += '''
 m1, n1 = mychain.basic_rot(x1, y1, '''+str(first_degree)+''')
@@ -446,7 +446,7 @@ m1, n1 = mychain.basic_rot(x1, y1, '''+str(first_degree)+''')
  
     # 下段連接直線
     # 從 x11, y11 作為起點
-    first_degree = -10.78+90
+    first_degree = -10.78 +90
     repeat = 10
     outstring += '''
 r1, s1 = mychain.basic_rot(x11, y11, '''+str(first_degree)+''')
