@@ -61,12 +61,12 @@
 <v t="leo.20160619221712.28"><vh>snap_link</vh></v>
 <v t="leo.20160619221712.29"><vh>snap_gear</vh></v>
 </v>
-<v t="leo.20160619222026.1" a="E"><vh>@clean bg11_40323240_cdw13.py</vh>
+<v t="leo.20160619222026.1"><vh>@clean bg11_40323240_cdw13.py</vh>
 <v t="leo.20160619222405.1"><vh>bg11_40323240_cdw13 declarations</vh></v>
 <v t="leo.20160619222405.2"><vh>draw_fourcircle</vh></v>
 </v>
 <v t="leo.20160526104335.1"><vh>@edit bg11_40323240_cdw14.py</vh></v>
-<v t="amd.20160501221015.1" a="E"><vh>@path ./../../../</vh>
+<v t="amd.20160501221015.1"><vh>@path ./../../../</vh>
 <v t="amd.20160501221001.1" a="E"><vh>@clean myflaskapp.py</vh>
 <v t="amd.20160501221001.2"><vh>myflaskapp declarations</vh></v>
 <v t="amd.20160501221001.3"><vh>index</vh></v>
